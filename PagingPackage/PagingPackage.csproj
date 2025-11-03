@@ -8,7 +8,7 @@
 	<Authors>Grigorios Kokozides</Authors>
 	<Company>Grigorios Kokozides</Company>
 	<Description>Lightweight and async-friendly paging utility for .NET.</Description>
-	<RepositoryUrl>https://github.com/yourusername/PagingToolkit</RepositoryUrl>
+	<RepositoryUrl>https://github.com/Gregory95/Dotnet_PagingPackage</RepositoryUrl>
   </PropertyGroup>
 	
 
