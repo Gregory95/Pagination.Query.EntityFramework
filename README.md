@@ -7,13 +7,13 @@ Lightweight, async-friendly paging utility for .NET (targeting .NET9).
 Package
 
 - PackageId: `PagingToolkit`
-- Version: `1.0.0`
+- Version: `1.0.2`
 - Targets: `.NET9` (net9.0)
 - Dependency: `Microsoft.EntityFrameworkCore` (used for async LINQ extensions)
 
 Features
 
-- `PagingParameters` — a simple DTO to carry paging and optional sorting parameters.
+- `PagingParameters` — a simple DTO to carry paging.
 - `PagingToolkit<T>` — a generic page container that holds the items for a single page and metadata such as current page, total pages, page size and total count.
 - Synchronous and asynchronous factory methods that operate on `IQueryable<T>`.
 
@@ -21,18 +21,17 @@ Install
 
 - Using the .NET CLI:
 
-`dotnet add package PagingToolkit --version 1.0.0`
+`dotnet add package PagingToolkit --version 1.0.2`
 
 - Or add a `PackageReference` to your project file:
 
-`<PackageReference Include="PagingToolkit" Version="1.0.0" />`
+`<PackageReference Include="PagingToolkit" Version="1.0.2" />`
 
 Quick overview
 
 - `PagingParameters`
  - `PageNumber` (default `1`) — this library's parameter is1-based for convenience when used in APIs.
  - `PageSize` (default `10`, maximum `100`) — values greater than the maximum are capped to `100`.
- - `SortBy` / `SortDesc` — optional sorting hints (no automatic sorting applied by the library).
 
 - `PagingToolkit<T>`
  - Properties: `CurrentPage`, `TotalPages`, `PageSize`, `TotalCount`.
@@ -49,7 +48,7 @@ Example (Entity Framework Core)
 
 ```csharp
 //1. Prepare paging parameters (1-based page number)
-var pagingParams = new PagingParameters { PageNumber =1, PageSize =20, SortBy = "Name" };
+var pagingParams = new PagingParameters { PageNumber =1, PageSize =20 };
 
 //2. Build your query (apply filters and ordering BEFORE paging)
 var query = context.Products.AsNoTracking().OrderBy(p => p.Name);
