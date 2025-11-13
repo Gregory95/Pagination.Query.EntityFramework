@@ -18,6 +18,8 @@ namespace PagingPackage
     /// <typeparam name="T">The type of elements contained in the paged collection.</typeparam>
     public class PagingToolkit<T> : List<T>
     {
+        public PagingToolkit() { }
+
         public PagingToolkit(IEnumerable<T> items, int count, int pageNumber, int pageSize)
         {
             CurrentPage = pageNumber;
