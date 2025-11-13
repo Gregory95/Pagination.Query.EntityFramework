@@ -1,4 +1,4 @@
-# Pagination.NET
+# Pagination.Query.EntityFramework
 
 Lightweight, async-friendly paging utility for .NET (targeting .NET9).
 
@@ -6,7 +6,7 @@ Lightweight, async-friendly paging utility for .NET (targeting .NET9).
 
 Package
 
-- PackageId: `Pagination.NET`
+- PackageId: `Pagination.Query.EntityFramework`
 - Version: `1.0.0`
 - Targets: `.NET9` (net9.0)
 - Dependency: `Microsoft.EntityFrameworkCore` (used for async LINQ extensions)
@@ -21,11 +21,11 @@ Install
 
 - Using the .NET CLI:
 
-`dotnet add package Pagination.NET --version 1.0.3`
+`dotnet add package Pagination.Query.EntityFramework --version 1.0.3`
 
 - Or add a `PackageReference` to your project file:
 
-`<PackageReference Include="Pagination.NET" Version="1.0.3" />`
+`<PackageReference Include="Pagination.Query.EntityFramework" Version="1.0.3" />`
 
 Quick overview
 
