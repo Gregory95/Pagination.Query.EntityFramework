@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PageSharp
+namespace Pagination.Query.EntityFramework
 {
     /// <summary>
     /// Provides a generic collection that supports paging operations and metadata for paged results.
@@ -16,11 +16,11 @@ namespace PageSharp
     /// relevant paging metadata. Thread safety is not guaranteed; external synchronization is required if accessed
     /// concurrently.</remarks>
     /// <typeparam name="T">The type of elements contained in the paged collection.</typeparam>
-    public class PageSharp<T> : List<T>
+    public class PagingWrap<T> : List<T>
     {
-        public PageSharp() { }
+        public PagingWrap() { }
 
-        public PageSharp(IEnumerable<T> items, int count, int pageNumber, int pageSize)
+        public PagingWrap(IEnumerable<T> items, int count, int pageNumber, int pageSize)
         {
             CurrentPage = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -35,7 +35,7 @@ namespace PageSharp
         public int TotalCount { get; set; }
 
         /// <summary>
-        /// Creates a new instance of <see cref="PageSharp{T}"/> containing a single page of items from the
+        /// Creates a new instance of <see cref="PagingWrap{T}"/> containing a single page of items from the
         /// specified queryable source.
         /// </summary>
         /// <remarks>The method executes the query asynchronously and returns only the items for the
@@ -47,11 +47,11 @@ namespace PageSharp
         /// <param name="ct">A cancellation token that can be used to cancel the asynchronous operation.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="PageSharp{T}"/>
         /// with the items for the specified page and the total item count.</returns>
-        public static async Task<PageSharp<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize, CancellationToken ct)
+        public static async Task<PagingWrap<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize, CancellationToken ct)
         {
             var count = await source.CountAsync(ct);
             var items = await source.Skip(pageNumber * pageSize).Take(pageSize).ToListAsync(ct);
-            return new PageSharp<T>(items, count, pageNumber, pageSize);
+            return new PagingWrap<T>(items, count, pageNumber, pageSize);
         }
 
         /// <summary>
@@ -66,11 +66,11 @@ namespace PageSharp
         /// <param name="pageSize">The number of items to include in each page. Must be greater than 0.</param>
         /// <returns>A PagingToolkit<T> containing the items for the specified page, along with pagination metadata such as total
         /// item count, page number, and page size.</returns>
-        public static PageSharp<T> Create(IQueryable<T> source, int pageNumber, int pageSize)
+        public static PagingWrap<T> Create(IQueryable<T> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip(pageNumber * pageSize).Take(pageSize).ToList();
-            return new PageSharp<T>(items, count, pageNumber, pageSize);
+            return new PagingWrap<T>(items, count, pageNumber, pageSize);
         }
     }
 }
